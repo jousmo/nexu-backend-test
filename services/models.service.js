@@ -1,5 +1,6 @@
 const { models, brands } = require('../db')
 const { searchIndex } = require('../helpers')
+const boom = require('@hapi/boom')
 
 async function findModels ({ greater, lower }) {
   if (greater && lower) {
@@ -17,13 +18,13 @@ async function update (id, changes) {
   const { average_price } = !!changes && changes
 
   if (average_price < 100000) {
-    throw new Error('tha average less than 100,000')
+    throw boom.badRequest('tha average less than 100,000')
   }
 
   const index = searchIndex(id, models)
 
   if (index === -1) {
-    throw new Error('model not found')
+    throw boom.notFound('model not found')
   }
 
   // Update the model

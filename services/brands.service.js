@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom')
 const { brands, models } = require('../db')
 const { searchModelsByBrandId, searchName, calculateId, searchIndex } = require('../helpers')
 
@@ -9,7 +10,7 @@ async function findModelsByBrandId (id) {
   const brand = searchModelsByBrandId(id, models)
 
   if (!brand) {
-    throw new Error('brand not found')
+    throw boom.notFound('brand not found')
   }
 
   return brand
@@ -20,7 +21,7 @@ async function createBrand (data) {
   const nameExists = searchName(name, brands)
 
   if (nameExists) {
-    throw new Error('name brand exist')
+    throw boom.conflict('name brand exist')
   }
 
   const id = calculateId(brands)
@@ -35,18 +36,18 @@ async function createModelByBrandId (brandId, data) {
   const brandIndex = searchIndex(brandId, brands)
 
   if (typeof (average_price) === 'number' && average_price < 100000) {
-    throw new Error('tha average less than 100,000')
+    throw boom.badRequest('tha average less than 100,000')
   }
 
   if (brandIndex === -1) {
-    throw new Error('brand not exist')
+    throw boom.notFound('brand not exist')
   }
 
   const { name } = data
   const nameExists = searchName(name, models)
 
   if (nameExists) {
-    throw new Error('name model exist')
+    throw boom.conflict('name model exist')
   }
 
   // Create model
