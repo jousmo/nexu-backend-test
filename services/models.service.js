@@ -14,12 +14,8 @@ async function findModels ({ greater, lower }) {
   }
 }
 
-async function update (id, changes) {
+async function updateModel (id, changes) {
   const { average_price } = !!changes && changes
-
-  if (average_price < 100000) {
-    throw boom.badRequest('tha average less than 100,000')
-  }
 
   const index = searchIndex(id, models)
 
@@ -44,5 +40,5 @@ async function update (id, changes) {
 
 module.exports = {
   findModels,
-  update
+  updateModel
 }

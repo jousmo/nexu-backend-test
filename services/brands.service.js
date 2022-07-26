@@ -25,7 +25,7 @@ async function createBrand (data) {
   }
 
   const id = calculateId(brands)
-  const newBrand = { id, ...data }
+  const newBrand = { id, average_price: 0, ...data }
   brands.push(newBrand)
 
   return newBrand
@@ -34,10 +34,6 @@ async function createBrand (data) {
 async function createModelByBrandId (brandId, data) {
   const { average_price } = !!data && data
   const brandIndex = searchIndex(brandId, brands)
-
-  if (typeof (average_price) === 'number' && average_price < 100000) {
-    throw boom.badRequest('tha average less than 100,000')
-  }
 
   if (brandIndex === -1) {
     throw boom.notFound('brand not exist')
