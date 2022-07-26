@@ -1,8 +1,11 @@
 const boom = require('@hapi/boom')
+const { ENVIRONMENT } = require('../config')
 
 function logErrors (err, req, res, next) {
   const { message, stack } = err
-  console.error({ message, stack })
+  if (ENVIRONMENT !== 'test') {
+    console.error({ message, stack })
+  }
   next(err)
 }
 
