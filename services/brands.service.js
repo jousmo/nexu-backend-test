@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom')
-const { brands, models } = require('../db')
+const { brands, models } = require('../lib/mock-db')
 const { searchModelsByBrandId, searchName, calculateId, searchIndex } = require('../helpers')
 
 async function findBrands () {

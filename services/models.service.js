@@ -1,4 +1,4 @@
-const { models, brands } = require('../db')
+const { models, brands } = require('../lib/mock-db')
 const { searchIndex } = require('../helpers')
 const boom = require('@hapi/boom')
 
