@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/jousmo/nexu-backend-test/compare/v0.2.0...v1.0.0) (2022-07-27)
+
+
+### Features
+
+* move mock db ([a18791c](https://github.com/jousmo/nexu-backend-test/commit/a18791c6257f7a52f6920c5c26b3d85325767234))
+
 ## [0.2.0](https://github.com/jousmo/nexu-backend-test/compare/v0.1.0...v0.2.0) (2022-07-27)
 
 
