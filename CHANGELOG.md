@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/jousmo/nexu-backend-test/compare/v0.1.0...v0.2.0) (2022-07-27)
+
+
+### Features
+
+* create readme ([e200d77](https://github.com/jousmo/nexu-backend-test/commit/e200d77d2c192ceb1569e5dbc7054dec5ba25ec6))
+
+
+### Bug Fixes
+
+* update env example ([2fdc328](https://github.com/jousmo/nexu-backend-test/commit/2fdc328e7de2dd5af7b5078f3ea5ca857e421d0e))
+* update readme endpoint use and api version ([4e7efe6](https://github.com/jousmo/nexu-backend-test/commit/4e7efe6f30467145db1b7309dfa9734a01a9cbf9))
+
 ## 0.1.0 (2022-07-26)
 
 
