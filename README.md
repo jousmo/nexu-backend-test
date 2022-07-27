@@ -43,5 +43,19 @@ NODE_PORT=
 - `npm run start` to run for production
 - `npm run dev` to run for development
 
+### Api V1 Routes
+
+- `/api/v1`
+
+#### Examples
+
+```
+GET    /brands
+GET    /brands/:id/models
+POST   /brands
+POST   /brands/:id/models
+PUT    /models/:id
+GET    /models
+```
 
 =)
