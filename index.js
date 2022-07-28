@@ -4,7 +4,13 @@ const cors = require('cors')
 const helmet = require('helmet')
 const server = express()
 const routes = require('./routes')
-const { notFoundHandler, logErrors, errorHandler } = require('./middlewares')
+const {
+  notFoundHandler,
+  logErrors,
+  boomErrorHandler,
+  ormErrorHandler,
+  errorHandler
+} = require('./middlewares')
 const { PORT, ENVIRONMENT } = require('./config/server')
 const db = require('./db/models')
 
@@ -15,6 +21,8 @@ server.use(express.urlencoded({ extended: false }))
 server.use('/api/v1', routes)
 server.use(notFoundHandler)
 server.use(logErrors)
+server.use(boomErrorHandler)
+server.use(ormErrorHandler)
 server.use(errorHandler)
 
 ;(async () => {
