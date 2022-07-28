@@ -5,12 +5,15 @@ Nexu backend challenge
 ## Requirements
 
 - NVM (Node 16.15.1) - [Docs NVM]('https://github.com/nvm-sh/nvm')
+- Docker - [Docs Docker](https://docs.docker.com/get-docker)
 
 ## Settings
 
 - ExpressJS 4.18.1
 - Ava 4.3.1
 - Conventional Commits 17.0.3
+- Docker Compose
+- Sequalize V6 
 
 ## Hooks
 
@@ -36,7 +39,19 @@ Nexu backend challenge
 ```
 NODE_ENV= development | production | test
 NODE_PORT=
+
+# For docker postgres database with sequalize
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_PORT=
+DB_DIALECT=
+DB_HOST=
+DB_LOGGING=
+DB_SEEDER_STORAGE=
 ```
+
+- Init docker-compose.yml `docker-compose up -d`
 
 ### Modes
 
