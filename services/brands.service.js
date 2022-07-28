@@ -1,13 +1,27 @@
+const boom = require('@hapi/boom')
 module.exports = brandsRepository => {
   async function findBrands () {
     return await brandsRepository.findBrands()
   }
 
   async function findModelsByBrandId (id) {
+    const brand = await brandsRepository.findBrandById(id)
+
+    if (!brand) {
+      throw boom.notFound('brand not found')
+    }
+
     return await brandsRepository.findModelsByBrandId(id)
   }
 
   async function createBrand (data) {
+    const { name } = !!data && data
+    const nameExists = await brandsRepository.findBrandByName(name)
+
+    if (nameExists) {
+      throw boom.conflict('name brand exist')
+    }
+
     return await brandsRepository.createBrand(data)
   }
 
