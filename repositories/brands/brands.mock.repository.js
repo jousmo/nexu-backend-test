@@ -1,29 +1,24 @@
 const boom = require('@hapi/boom')
 const { brands, models } = require('../../lib/mock-db')
-const { searchModelsByBrandId, searchName, calculateId, searchIndex } = require('../../helpers')
+const { searchModelsByBrandId, searchName, calculateId, searchIndex, searchById } = require('../../helpers')
+
+async function findBrandById (id) {
+  return searchById(id, brands)
+}
+
+async function findBrandByName (name) {
+  return searchName(name, brands)
+}
 
 async function findBrands () {
   return brands || []
 }
 
 async function findModelsByBrandId (id) {
-  const brand = searchModelsByBrandId(id, models)
-
-  if (!brand) {
-    throw boom.notFound('brand not found')
-  }
-
-  return brand
+  return searchModelsByBrandId(id, models)
 }
 
 async function createBrand (data) {
-  const { name } = data
-  const nameExists = searchName(name, brands)
-
-  if (nameExists) {
-    throw boom.conflict('name brand exist')
-  }
-
   const id = calculateId(brands)
   const newBrand = { id, average_price: 0, ...data }
   brands.push(newBrand)
@@ -60,6 +55,8 @@ async function createModelByBrandId (brandId, data) {
 }
 
 module.exports = {
+  findBrandById,
+  findBrandByName,
   findBrands,
   findModelsByBrandId,
   createBrand,
