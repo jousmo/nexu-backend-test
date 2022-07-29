@@ -26,6 +26,19 @@ module.exports = brandsRepository => {
   }
 
   async function createModelByBrandId (brandId, data) {
+    const { name } = !!data && data
+    const brand = await brandsRepository.findBrandById(brandId)
+
+    if (!brand) {
+      throw boom.notFound('brand not found')
+    }
+
+    const nameModelExists = await brandsRepository.findModelByName(name)
+
+    if (nameModelExists) {
+      throw boom.conflict('name model exist')
+    }
+
     return await brandsRepository.createModelByBrandId(brandId, data)
   }
 
