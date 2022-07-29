@@ -1,4 +1,4 @@
-const searchModelsByBrandId = (id, schema) => schema.find(el => el.brandId === +id)
+const searchModelsByBrandId = (id, schema) => schema.filter(el => el.brandId === +id)
 
 const searchName = (name, schema) => schema.find(el => el.name.toLowerCase() === name.toLowerCase())
 

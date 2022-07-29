@@ -1,0 +1,24 @@
+version: "3"
+
+networks:
+  net-nexu:
+
+volumes:
+  db-nexu:
+
+services:
+  postgres:
+    image: postgres:latest
+    hostname: postgres
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - db-nexu:/var/lib/postgresql/data
+    networks:
+      - net-nexu

@@ -1,8 +1,15 @@
 const notFoundHandler = require('./notFound.handler')
-const { errorHandler, logErrors } = require('./error.handler')
+const {
+  logErrors,
+  boomErrorHandler,
+  ormErrorHandler,
+  errorHandler
+} = require('./error.handler')
 
 module.exports = {
   notFoundHandler,
-  errorHandler,
-  logErrors
+  logErrors,
+  boomErrorHandler,
+  ormErrorHandler,
+  errorHandler
 }
