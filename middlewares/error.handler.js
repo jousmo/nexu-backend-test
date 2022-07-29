@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom')
-const { ValidationError } = require('sequelize')
+const { ValidationError, DatabaseError } = require('sequelize')
 const { ENVIRONMENT } = require('../config/server')
 
 function logErrors (err, req, res, next) {
@@ -20,11 +20,11 @@ function boomErrorHandler (err, req, res, next) {
 }
 
 function ormErrorHandler (err, req, res, next) {
-  if (err instanceof ValidationError) {
+  if (err instanceof ValidationError || err instanceof DatabaseError) {
     const { output } = boom.conflict(err.name)
     const newOutput = {
       ...output.payload,
-      errors: err.errors
+      errors: err.errors || err.message
     }
 
     return res.status(output.statusCode).json(newOutput)
