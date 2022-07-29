@@ -33,7 +33,7 @@ async function findModelsByBrandId (id) {
 }
 
 async function createBrand (data) {
-  return await Brands.create({ average_price: 0, ...data })
+  return await Brands.create({ ...data })
 }
 
 async function createModelByBrandId (brandId, data) {
