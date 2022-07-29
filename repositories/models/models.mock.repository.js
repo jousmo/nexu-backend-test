@@ -1,6 +1,9 @@
-const boom = require('@hapi/boom')
 const { models, brands } = require('../../lib/mock-db')
-const { searchIndex } = require('../../helpers')
+const { searchIndex, searchById } = require('../../helpers')
+
+async function findModelById (id) {
+  return searchById(id, models)
+}
 
 async function findModels ({ greater, lower }) {
   if (greater && lower) {
@@ -16,12 +19,7 @@ async function findModels ({ greater, lower }) {
 
 async function updateModel (id, changes) {
   const { average_price } = !!changes && changes
-
   const index = searchIndex(id, models)
-
-  if (index === -1) {
-    throw boom.notFound('model not found')
-  }
 
   // Update the model
   const model = models[index]
@@ -39,6 +37,7 @@ async function updateModel (id, changes) {
 }
 
 module.exports = {
+  findModelById,
   findModels,
   updateModel
 }
