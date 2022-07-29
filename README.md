@@ -13,16 +13,13 @@ Nexu backend challenge
 - Ava 4.3.1
 - Conventional Commits 17.0.3
 - Docker Compose
-- Sequalize V6 
+- Sequelize V6 
+- Postgres V14 Database (docker-compose.yml)
 
 ## Hooks
 
 - Pre commit: Conventional Commits & Lint
 - Pre push: Test
-
-### Tests
-
-- `npm run test` to run tests on demand.
 
 ### Releases
 
@@ -49,14 +46,50 @@ DB_DIALECT=
 DB_HOST=
 DB_LOGGING=
 DB_SEEDER_STORAGE=
+DB_NAME_TEST=
 ```
 
-- Init docker-compose.yml `docker-compose up -d`
+- `docker-compose up -d` Init docker-compose.yml for postgres database
+
+## POC => Hexagonal Architecture
+This project implements dependency injection, you can use the mock db or connect to the database
+
+Note: if you are going to use the database repository (brandsSequelizeRepository - modelsSequelizeRepository), you must execute the following
+
+- `npm run db:init` build the db and load seeds
+
+### Example
+In the routes `brands`
+
+```JS
+// Use brandsSequelizeRepository or brandsMockRepository
+const { brandsSequelizeRepository } = require('../repositories')
+
+...
+
+const brands = await brandsServices(brandsSequelizeRepository).findBrands()
+```
+
+In the routes `models`
+
+```JS
+// Use modelsSequelizeRepository or modelsMockRepository
+const { modelsSequelizeRepository } = require('../repositories')
+
+...
+
+const models = await modelsServices(modelsSequelizeRepository).findModels(query)
+```
 
 ### Modes
 
 - `npm run start` to run for production
 - `npm run dev` to run for development
+
+
+### Tests
+
+- `npm run test` to run tests on demand.
 
 ### Api V1 Routes
 
