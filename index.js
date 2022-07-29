@@ -27,11 +27,11 @@ server.use(errorHandler)
 
 ;(async () => {
   try {
-    await db.sequelize.sync().then(() => console.log('Sync DB'))
-    if (ENVIRONMENT !== 'test') {
-      server.listen(PORT, () => console.log(`Server running in port ${PORT}`))
-    } else {
+    if (ENVIRONMENT === 'test') {
       module.exports = server
+    } else {
+      await db.sequelize.sync().then(() => console.log('Sync DB'))
+      server.listen(PORT, () => console.log(`Server running in port ${PORT}`))
     }
   } catch (err) {
     console.error(err)
