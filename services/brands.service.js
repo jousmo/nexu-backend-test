@@ -1,4 +1,5 @@
 const boom = require('@hapi/boom')
+
 module.exports = brandsRepository => {
   async function findBrands () {
     return await brandsRepository.findBrands()
